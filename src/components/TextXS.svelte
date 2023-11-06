@@ -1,0 +1,1 @@
+<span class="text-xs text-slate-500"><slot /></span>
