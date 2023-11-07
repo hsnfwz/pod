@@ -18,14 +18,15 @@
 
 <a href={`/p/${post.id}`} class="group w-60 sm:w-80">
   <div class="flex flex-col bg-slate-900 border-2 border-slate-800 p-4 rounded-lg  gap-4 group-hover:border-sky-500">
-    <a class="self-start hover:underline flex items-center gap-2" href={`/u/${post.profile_id.username}`}>
-      <div class="w-8 h-8 rounded-full bg-slate-500"></div>
-      <TextBase>{post.profile_id.username}</TextBase>
+    <a class="self-start group/profile flex items-center gap-2" href={`/u/${post.profile_id.username}`}>
+      <!-- <div class="w-8 h-8 rounded-full bg-slate-500"></div> -->
+      <span>{post.profile_id.display_name}</span>
       {#if post.profile_id.is_verified}
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-        <path fill-rule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-      </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+          <path fill-rule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+        </svg>
       {/if}
+      <span class={`text-slate-500 ${post.profile_id.username.length > 20 ? 'w-[20ch] overflow-hidden whitespace-nowrap text-ellipsis' : ''} group-hover/profile:underline`}>@{post.profile_id.username}</span>
     </a>
     <TextXS>{new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' }).format(new Date(postDateUTC))}</TextXS>
     {#if post.is_nsfw || post.is_spoiler}

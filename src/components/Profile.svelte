@@ -1,12 +1,7 @@
 <script>
-  import { invalidate, invalidateAll } from '$app/navigation';
   import { page } from '$app/stores';
-    import TextBase from 'components/TextBase.svelte';
-    import TextXS from 'components/TextXS.svelte';
-    import { afterUpdate, onMount } from 'svelte';
-    import PostPreview from 'components/PostPreview.svelte';
-    import TextXL from 'components/TextXL.svelte';
-    import ProfilePreview from 'components/ProfilePreview.svelte';
+  import TextBase from 'components/TextBase.svelte';
+  import TextXS from 'components/TextXS.svelte';
   
   export let profile;
 
@@ -20,14 +15,10 @@
         $page.data.supabase.rpc('profile_increment', { row_id: profile.id, row_column: 'follower_count', increment_amount: 1 }),
       ]);
     }
-
-    invalidateAll();
   }
 
   const handleCancelClick = async () => {
     await $page.data.supabase.from('profile_follow').delete().match({ sender_profile_id: $page.data.session.user.id, receiver_profile_id: profile.id });
-
-    invalidate('app:profileid');
   }
 
   const handleUnfollowClick = async () => {
@@ -36,8 +27,6 @@
       $page.data.supabase.rpc('profile_decrement', { row_id: $page.data.session.user.id, row_column: 'following_count', decrement_amount: 1 }),
       $page.data.supabase.rpc('profile_decrement', { row_id: profile.id, row_column: 'follower_count', decrement_amount: 1 }),
     ]);
-
-    invalidate('app:profileid');
   }
 
   const handleRemoveFollowerClick = async() => {
@@ -61,13 +50,14 @@
 
 <div class="flex flex-col bg-slate-900 p-4 rounded-lg gap-4 w-60 sm:w-80">
   <div class="flex items-center gap-2">
-    <div class="w-8 h-8 rounded-full bg-slate-500"></div>
-    <TextBase>{profile.username}</TextBase>
+    <!-- <div class="w-8 h-8 rounded-full bg-slate-500"></div> -->
+    <span>{profile.display_name}</span>
     {#if profile.is_verified}
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
         <path fill-rule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-      </svg>  
+      </svg>
     {/if}
+    <span class="text-slate-500 w-[20ch] overflow-hidden whitespace-nowrap text-ellipsis group-hover/profile:underline">@{profile.username}</span>
   </div>
   <TextXS class="text-xs text-slate-500">Joined {new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' }).format(new Date(profileDateUTC))}</TextXS>
   <TextBase>{profile.is_private ? 'Private Account' : 'Public Account'}</TextBase>

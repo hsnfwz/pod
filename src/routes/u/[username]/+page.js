@@ -3,11 +3,11 @@
 export async function load({ params, parent, depends }) {
   const { supabase, session } = await parent();
 
+  if (!session) return;
+
   let IS_DEBUG = false;
 
   let profile = undefined;
-
-  if (!session) return { profile };
 
   const { data: profileRecords } = await supabase
     .from('profile')
@@ -67,8 +67,6 @@ export async function load({ params, parent, depends }) {
   IS_DEBUG && console.log('followingRecords', followingRecords);
 
   let following = followingRecords;
-
-  depends('app:profileid');
 
   return {
     profile,

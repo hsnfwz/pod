@@ -80,7 +80,7 @@
 
 <div class="flex flex-col gap-4 w-60 sm:w-80">
   <div class="flex flex-col gap-4 bg-slate-900 p-4 rounded-lg">
-    <input minlength="1" maxlength="1000" autocomplete="off" type="text" placeholder="Search" class="w-full border-box rounded-lg bg-slate-800 p-4" bind:value={searchTerm} on:input={handleSearch} />
+    <input minlength="1" maxlength="1000" autocomplete="off" type="text" placeholder="Search" class="w-full border-box rounded-lg bg-slate-800 p-2" bind:value={searchTerm} on:input={handleSearch} />
     <div class="flex gap-2">
       <button type="button" class="w-full justify-center items-center flex gap-2 bg-slate-800 font-bold px-2 py-1 rounded-lg select-none active:bg-slate-950 disabled:opacity-50 disabled:pointer-events-none" on:click={handleSearchClick} disabled={searchTerm.length === 0}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">

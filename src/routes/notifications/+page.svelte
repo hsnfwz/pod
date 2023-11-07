@@ -6,6 +6,7 @@
 
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
+  import { profile } from 'stores/profile';
 
   let profileFollowNotifications = $page.data.profileFollow;
   let profileShareNotifications = $page.data.profileShare;
@@ -108,54 +109,48 @@
   });
 </script>
 
-{#if $page.data.session}
-  <div class="flex flex-col gap-4">
-    <div class="flex bg-slate-900 rounded-lg p-4">
-      <a class={`hover:underline hover:text-sky-500 px-2 py-1 font-bold self-start ${$page.url.search === '?view=follows' ? 'text-sky-500 pointer-events-none' : ''}`} href="/notifications?view=follows">Follows</a>
-      <a class={`hover:underline hover:text-sky-500 px-2 py-1 font-bold self-start ${$page.url.search === '?view=shares' ? 'text-sky-500 pointer-events-none' : ''}`} href="/notifications?view=shares">Shares</a>
-      <a class={`hover:underline hover:text-sky-500 px-2 py-1 font-bold self-start ${$page.url.search === '?view=gifts' ? 'text-sky-500 pointer-events-none' : ''}`} href="/notifications?view=gifts">Gifts</a>
-    </div>
-
-    {#if $page.url.search === '' || $page.url.search === '?view=follows'}
-      <div class="flex flex-col gap-4">
-        {#if profileFollowNotifications.length > 0}
-          {#each profileFollowNotifications as profileFollowNotification}
-            <FollowNotification profileFollow={profileFollowNotification} profile={$page.data.session.profile} />
-          {/each}
-        {:else}
-          <div class="w-60 sm:w-80">
-            <TextXS>No Notifications</TextXS>
-          </div>
-        {/if}
-      </div>
-    {:else if $page.url.search === '?view=shares'}
-      <div class="flex flex-col gap-4">
-        {#if profileShareNotifications.length > 0}
-          {#each profileShareNotifications as profileShareNotification}
-            <ShareNotification profileShare={profileShareNotification} profile={$page.data.session.profile} />
-          {/each}
-        {:else}
-          <div class="w-60 sm:w-80">
-            <TextXS>No Notifications</TextXS>
-          </div>
-        {/if}
-      </div>
-    {:else if $page.url.search === '?view=gifts'}
-      <div class="flex flex-col gap-4">
-        {#if profileGiftNotifications.length > 0}
-          {#each profileGiftNotifications as profileGiftNotification}
-            <GiftNotification profileGift={profileGiftNotification} profile={$page.data.session.profile} />
-          {/each}
-        {:else}
-          <div class="w-60 sm:w-80">
-            <TextXS>No Notifications</TextXS>
-          </div>
-        {/if}
-      </div>
-    {/if}
+<div class="flex flex-col gap-4">
+  <div class="flex bg-slate-900 rounded-lg p-4">
+    <a class={`hover:underline hover:text-sky-500 px-2 py-1 font-bold self-start ${$page.url.search === '?view=follows' ? 'text-sky-500 pointer-events-none' : ''}`} href="/notifications?view=follows">Follows</a>
+    <a class={`hover:underline hover:text-sky-500 px-2 py-1 font-bold self-start ${$page.url.search === '?view=shares' ? 'text-sky-500 pointer-events-none' : ''}`} href="/notifications?view=shares">Shares</a>
+    <a class={`hover:underline hover:text-sky-500 px-2 py-1 font-bold self-start ${$page.url.search === '?view=gifts' ? 'text-sky-500 pointer-events-none' : ''}`} href="/notifications?view=gifts">Gifts</a>
   </div>
-{:else}
-<div class="flex flex-col gap-4 w-60 sm:w-80">
-  <p><a class="text-sky-500 hover:underline" href="/login">Sign in</a> to view</p>
+
+  {#if $page.url.search === '' || $page.url.search === '?view=follows'}
+    <div class="flex flex-col gap-4">
+      {#if profileFollowNotifications.length > 0}
+        {#each profileFollowNotifications as profileFollowNotification}
+          <FollowNotification profileFollow={profileFollowNotification} profile={$profile} />
+        {/each}
+      {:else}
+        <div class="w-60 sm:w-80">
+          <TextXS>No Notifications</TextXS>
+        </div>
+      {/if}
+    </div>
+  {:else if $page.url.search === '?view=shares'}
+    <div class="flex flex-col gap-4">
+      {#if profileShareNotifications.length > 0}
+        {#each profileShareNotifications as profileShareNotification}
+          <ShareNotification profileShare={profileShareNotification} profile={$profile} />
+        {/each}
+      {:else}
+        <div class="w-60 sm:w-80">
+          <TextXS>No Notifications</TextXS>
+        </div>
+      {/if}
+    </div>
+  {:else if $page.url.search === '?view=gifts'}
+    <div class="flex flex-col gap-4">
+      {#if profileGiftNotifications.length > 0}
+        {#each profileGiftNotifications as profileGiftNotification}
+          <GiftNotification profileGift={profileGiftNotification} profile={$profile} />
+        {/each}
+      {:else}
+        <div class="w-60 sm:w-80">
+          <TextXS>No Notifications</TextXS>
+        </div>
+      {/if}
+    </div>
+  {/if}
 </div>
-{/if}

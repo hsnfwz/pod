@@ -3,27 +3,24 @@
 export async function load({ params, parent, depends }) {
   const { supabase, session } = await parent();
 
+  if (!session) return;
+
   let IS_DEBUG = false;
 
   let post;
   let postReplies = [];
+  let followers = [];
 
-  if (!session) return { post: undefined, postReplies };
-
-  // get post
   const { data: postRecords } = await supabase
     .from('post')
     .select('*, profile_id (*)')
     .match({ id: params.id, is_hidden: false });
 
   post = postRecords[0];
-
   IS_DEBUG && console.log('postRecords', postRecords);
 
-  // check if post exists
-  if (!post) return { post: undefined, postReplies };
+  if (!post) return;
 
-  // get post replies
   const { data: postReplyRecords } = await supabase
   .from('post')
   .select('*, profile_id (*)')
@@ -31,36 +28,37 @@ export async function load({ params, parent, depends }) {
   .order('created_at', { ascending: false });
 
   postReplies = postReplyRecords;
-
   IS_DEBUG && console.log('postReplyRecords', postReplyRecords);
 
-  // if so, check if post belongs to profile
-  if (post.profile_id.id === session.user.id) return { post, postReplies };
+  const { data: profileFollowRecords } = await supabase
+  .from('profile_follow')
+  .select('*, sender_profile_id (*)')
+  .match({ status: 'CONFIRMED', receiver_profile_id: session.user.id })
+  .order('created_at', { ascending: false });
 
-  // if not, check if profile bought post
+  IS_DEBUG && console.log('profileFollowRecords', profileFollowRecords);
+  followers = profileFollowRecords;
+
+  if (post.profile_id.id === session.user.id) return { post, postReplies, followers };
+
   const { data: profileBuyRecords } = await supabase
     .from('profile_buy')
     .select('*')
     .match({ profile_id: session.user.id, post_id: post.id });
 
   IS_DEBUG && console.log('profileBuyRecords', profileBuyRecords);
-
   let profileBuy = profileBuyRecords[0];
 
-  // check if profile activity exists
   if (!profileBuy) {
-    // if not, check if profile was sent post
     const { data: profileShareRecords } = await supabase
       .from('profile_share')
       .select('*, sender_profile_id(*), receiver_profile_id(*)')
       .match({ receiver_profile_id: session.user.id, post_id: post.id });
 
     IS_DEBUG && console.log('profileShareRecords', profileShareRecords);
-
     let profileShare = profileShareRecords[0];
 
-    // check if profile share exists
-    if (!profileShare) return { post, postReplies };
+    if (!profileShare) return { post, postReplies, followers: [] };
 
     post.isShared = profileShare;
   }
@@ -72,7 +70,6 @@ export async function load({ params, parent, depends }) {
   .match({ profile_id: session.user.id, post_id: post.id });
 
   IS_DEBUG && console.log('profileSafeRecords', profileSafeRecords);
-
   let profileSafe = profileSafeRecords[0];
 
   // if so, check if profile gifted post
@@ -82,17 +79,15 @@ export async function load({ params, parent, depends }) {
     .match({ sender_profile_id: session.user.id, post_id: post.id });
 
   IS_DEBUG && console.log('profileGiftRecords', profileGiftRecords);
-
   let profileGift = profileGiftRecords[0];
 
   post.isBought = profileBuy;
   post.isGifted = profileGift;
   post.profileSafe = profileSafe;
 
-  depends('app:postid');
-
   return {
     post,
     postReplies,
+    followers,
   };
 }

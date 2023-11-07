@@ -202,7 +202,7 @@
 
 <form class="flex flex-col gap-4 bg-slate-900  p-4 rounded-lg w-60 sm:w-80">
   <div class="flex flex-col gap-2">
-    <textarea minlength="1" maxlength="1000" autocomplete="off" rows="5" id="body" placeholder="What's on your mind?" class="border-box rounded-lg bg-slate-800 p-4" bind:value={body} />
+    <textarea minlength="1" maxlength="1000" autocomplete="off" rows="5" id="body" placeholder="What's on your mind?" class="border-box rounded-lg bg-slate-800 p-2" bind:value={body} />
     {#if body.length === 1000}
       <p class="italic text-rose-500 flex gap-2 items-center">
         <span class="text-xs">Body character limit reached (1000)</span>
