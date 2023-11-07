@@ -58,10 +58,13 @@
 
 <!--
   HIGH PRIORITY
+  - redesign website to be even simpler and not look like every twitter alternative out there
   - mark button as "sent" after a post is shared to the user AND insert a "confirmed" profile_share record instead of a "pending" profile_share record when resharing same post that has already been confirmed before by the receiver
-  - if user bought a post, let them see the full body in the post preview
   - change gifting to super coins instead of regular coins
-  - show 12 and 24 hour time all around the app
+  - create the super coin store
+  - create report feature and post stats for safety
+  - if user bought a post, let them see the full body in the post preview
+  - show 12 and 24 hour time all around the app or maybe just a profile setting for preference
 
   LOW PRIORITY
   - live data updates throughout the app
