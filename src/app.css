@@ -6,7 +6,29 @@
 
 html,
 body {
-  background-color: #020617;
+  background-color: #000;
+  /* background-color: #020617; */
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@layer components {
+  .rainbow {
+    --angle: 0deg;
+    /* background: conic-gradient(from var(--angle), red, yellow, lime, aqua, blue, magenta, red); */
+    background: conic-gradient(from var(--angle), #ef4444, #f97316, #f59e0b, #eab308, #84cc16, #22c55e, #10b981, #14b8a6, #06b6d4, #0ea5e9, #3b82f6, #6366f1, #8b5cf6, #a855f7, #d946ef, #ec4899, #f43f5e);
+    animation: 3s rotate linear infinite;
+  }
+
+  @keyframes rotate {
+    to {
+      --angle: 360deg;
+    }
+  }
+  
+  @property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
 }

@@ -85,7 +85,7 @@
   $: if (showUsernameError) setTimeout(() => showUsernameError = false, 3000);
 </script>
 
-<div class="flex flex-col gap-4 w-60 sm:w-80">
+<div class="w-[500px] flex flex-col gap-4">
   <form class="flex flex-col bg-slate-900 p-4 rounded-lg gap-4 group-hover:border-sky-500">
     <div class="flex flex-col gap-4">
       <TextXL><label for="email">Email</label></TextXL>

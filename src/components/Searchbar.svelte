@@ -78,7 +78,7 @@
   const handleSearch = debounce(handleSearchInput, 1000);
 </script>
 
-<div class="flex flex-col gap-4 w-60 sm:w-80">
+<div class="flex flex-col gap-4">
   <div class="flex flex-col gap-4 bg-slate-900 p-4 rounded-lg">
     <input minlength="1" maxlength="1000" autocomplete="off" type="text" placeholder="Search" class="w-full border-box rounded-lg bg-slate-800 p-2" bind:value={searchTerm} on:input={handleSearch} />
     <div class="flex gap-2">
@@ -98,40 +98,38 @@
   </div>
 </div>
 
-<div class="flex flex-col gap-4 w-60 sm:w-80">
-  {#if postResults.length > 0}
+{#if postResults.length > 0}
+  <TextXL>Posts</TextXL>
+  <div class="flex flex-col gap-4">
+    {#each postResults as postResult}
+      <PostPreview post={postResult} showParentPost />
+    {/each}
+  </div>
+{/if}
+
+{#if profileResults.length > 0}
+  <div class="flex flex-col gap-4">
+    <TextXL>Users</TextXL>
+    {#each profileResults as profileResult}
+      <ProfilePreview profile={profileResult} />
+    {/each}
+  </div>
+{/if}
+
+{#if posts.length > 0}
+  <div class="flex flex-col gap-4">
     <TextXL>Posts</TextXL>
-    <div class="flex flex-col gap-4">
-      {#each postResults as postResult}
-        <PostPreview post={postResult} showParentPost />
-      {/each}
-    </div>
-  {/if}
+    {#each posts as post}
+      <PostPreview {post} showParentPost />
+    {/each}
+  </div>
+{/if}
 
-  {#if profileResults.length > 0}
-    <div class="flex flex-col gap-4">
-      <TextXL>Users</TextXL>
-      {#each profileResults as profileResult}
-        <ProfilePreview profile={profileResult} />
-      {/each}
-    </div>
-  {/if}
-
-  {#if posts.length > 0}
-    <div class="flex flex-col gap-4">
-      <TextXL>Posts</TextXL>
-      {#each posts as post}
-        <PostPreview {post} showParentPost />
-      {/each}
-    </div>
-  {/if}
-
-  {#if profiles.length > 0}
-    <div class="flex flex-col gap-4">
-      <TextXL>Users</TextXL>
-      {#each profiles as profile}
-        <ProfilePreview {profile} />
-      {/each}
-    </div>
-  {/if}
-</div>
+{#if profiles.length > 0}
+  <div class="flex flex-col gap-4">
+    <TextXL>Users</TextXL>
+    {#each profiles as profile}
+      <ProfilePreview {profile} />
+    {/each}
+  </div>
+{/if}

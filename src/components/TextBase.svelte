@@ -1,1 +1,1 @@
-<p class="break-words"><slot /></p>
+<p class=" break-words"><slot /></p>

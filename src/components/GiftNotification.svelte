@@ -16,7 +16,7 @@
   }
 </script>
 
-<div class="flex flex-col bg-slate-900 p-4 rounded-lg gap-4 w-60 sm:w-80">
+<div class="flex flex-col bg-slate-900 p-4 rounded-lg gap-4">
   <p class="self-start">
     You received a super coin from
     <a class="group/profile flex self-start items-center gap-2" href={`/u/${profileGift.sender_profile_id.username}`}>

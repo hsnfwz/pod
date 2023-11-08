@@ -48,7 +48,7 @@
   }
 </script>
 
-<div class="flex flex-col bg-slate-900 p-4 rounded-lg gap-4 w-60 sm:w-80">
+<div class="flex flex-col bg-slate-900 p-4 rounded-lg gap-4">
   <div class="flex items-center gap-2">
     <!-- <div class="w-8 h-8 rounded-full bg-slate-500"></div> -->
     <span>{profile.display_name}</span>

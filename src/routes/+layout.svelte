@@ -41,6 +41,7 @@
   });
 </script>
 
+
 <main class="flex justify-center gap-4 p-4">
   {#if isLoading}
     <p>Loading...</p>
@@ -58,25 +59,29 @@
 
 <!--
   HIGH PRIORITY
-  - redesign website to be even simpler and not look like every twitter alternative out there
-  - mark button as "sent" after a post is shared to the user AND insert a "confirmed" profile_share record instead of a "pending" profile_share record when resharing same post that has already been confirmed before by the receiver
-  - change gifting to super coins instead of regular coins
   - create the super coin store
   - create report feature and post stats for safety
-  - if user bought a post, let them see the full body in the post preview
-  - show 12 and 24 hour time all around the app or maybe just a profile setting for preference
+  - live data updates/feedback throughout the app
 
   LOW PRIORITY
-  - live data updates throughout the app
-  - update posts (require tracking edit history)
+  - animations throughout
+
   - delete profiles (currently hiding on delete)
   - pause profiles (currently hiding on delete)
+
+  - update posts (require tracking edit history)
+
+  - show sort/filter
   - filter by custom date range
   - broadcast and broadcast count for each post
-  - upload media files, create polls
-  - fix problems with logging in using magic email - seems to never work on first attempt
+  - post media files and polls
+  - show 12 or 24 hour time
+
+  - if a user changes their username, then any mentions in posts will have their outdated username - how should we handle this??
+  - when mentioning someone with a question mark for asking them a question how should we handle it??
+  - combine share and bought into 1 table called "redeemed" and status type of redeemed = (unlocked, sent)
+
   - supabase error handling
   - supabase RLS
   - optimize fetching/refreshing of data everywhere (limits, updating/loading state, etc.)
-  - fetch data in batches (either paginate or infinite scroll)
 -->
