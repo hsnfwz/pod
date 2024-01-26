@@ -18,7 +18,7 @@
           <TextXS>No Followers</TextXS>
         {:else}
           {#each $page.data.followers as follower}
-            <ProfilePreview profile={follower.sender_profile_id} />
+            <ProfilePreview user={follower.sender_profile_id} />
           {/each}
         {/if}
         <TextXL>Following</TextXL>
@@ -26,7 +26,7 @@
           <TextXS>No Following</TextXS>
         {:else}
           {#each $page.data.following as following}
-            <ProfilePreview profile={following.receiver_profile_id} />
+            <ProfilePreview user={following.receiver_profile_id} />
           {/each}
         {/if}
       {/if}

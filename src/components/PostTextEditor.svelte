@@ -237,15 +237,25 @@
   <div class="flex flex-col gap-2 p-4 border-2 border-slate-800 rounded-lg">
     <p class="text-slate-500">Preview</p>
     {#if isNSFW || isSpoiler}
-      <div class="flex gap-2">
-        {#if isNSFW}
-          <span class="px-2 py-1 bg-slate-800 rounded-lg">NSFW</span>
-        {/if}
-        {#if isSpoiler}
-          <span class="px-2 py-1 bg-slate-800 rounded-lg">SPOILER</span>
-        {/if}
-      </div>
-    {/if}
+    <div class="flex gap-2">
+      {#if isNSFW}
+        <div class="flex gap-2 items-center px-2 py-1 border-2 border-rose-500 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 fill-rose-500">
+            <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+          </svg>       
+          <span class="font-bold text-rose-500">NSFW</span>
+        </div>
+      {/if}
+      {#if isSpoiler}
+        <div class="flex gap-2 items-center px-2 py-1 border-2 border-amber-500 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 fill-amber-500">
+            <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+          </svg>       
+          <span class="font-bold text-amber-500">SPOILER</span>
+        </div>
+      {/if}
+    </div>
+  {/if}
     {#if body.length > 0}
       <div class="break-words">
         <p bind:this={bodyPreview} class="whitespace-pre-wrap"></p>

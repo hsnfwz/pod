@@ -111,7 +111,7 @@
   <div class="flex flex-col gap-4">
     <TextXL>Users</TextXL>
     {#each profileResults as profileResult}
-      <ProfilePreview profile={profileResult} />
+      <ProfilePreview user={profileResult} />
     {/each}
   </div>
 {/if}
@@ -129,7 +129,7 @@
   <div class="flex flex-col gap-4">
     <TextXL>Users</TextXL>
     {#each profiles as profile}
-      <ProfilePreview {profile} />
+      <ProfilePreview user={profile} />
     {/each}
   </div>
 {/if}

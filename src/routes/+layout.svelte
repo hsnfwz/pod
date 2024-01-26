@@ -59,11 +59,44 @@
 
 <!--
   HIGH PRIORITY
-  - create the super coin store
-  - create report feature and post stats for safety
+  - if a post is nsfw or spoiler, user should click reveal before seeing the content
+  - check abilities when doing any activity
+  - decrement profile super coin count on redeem
+  - disable button if profile super coin coin is less than cost
+  - if an account is private, mark posts by them as private so that only followers can view them and no the general public
   - live data updates/feedback throughout the app
 
+
+
+  REVISIT
+    - problems with report system
+    -- it can be easily abused for simply not agreeing with something
+    -- needs people to review what was reported
+
+    - problems with a vote system
+    -- it can be easily abused for simply not agreeing with something
+    -- not everyone will vote safe or unsafe
+
+    - police system
+    -- users can apply to be a police officer
+    -- each officer would agree to the rules and that breaking them would result in an temporary ban
+    -- each officer would specialize in a field (ex: hate speech, fake news, etc.)
+    -- each officer would have access to a page containing all reported posts
+    -- each officer would confirm (reward user) or reject (penalize and temporarily ban user) a report by a user
+    -- each officer would go through a review process every period of time
+    -- each officer would have a badge on their account
+    -- each officer earns coins and super coins for their efforts
+    -- officers can also report content for other officers to review
+    -- each user can see which officer reviewed their post - helps in case an officer abuses power and needs to be reported by the user
+
+    - problems with a police system
+    -- needs people to review what was reported
+    -- requires constant performance reviews of the officers to ensure rules are being followed
+
+
+
   LOW PRIORITY
+  - profile customizations through the shop (inspired by reddit and discord)
   - animations throughout
 
   - delete profiles (currently hiding on delete)
@@ -75,7 +108,9 @@
   - filter by custom date range
   - broadcast and broadcast count for each post
   - post media files and polls
-  - show 12 or 24 hour time
+  - setting to show 12 or 24 hour time
+  - setting to show/hide nsfw and spoiler content
+  - dark mode scrollbar
 
   - if a user changes their username, then any mentions in posts will have their outdated username - how should we handle this??
   - when mentioning someone with a question mark for asking them a question how should we handle it??
@@ -84,4 +119,6 @@
   - supabase error handling
   - supabase RLS
   - optimize fetching/refreshing of data everywhere (limits, updating/loading state, etc.)
+
+  - organize code (components, layouts, sublayouts, etc.)
 -->

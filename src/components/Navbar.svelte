@@ -1,6 +1,5 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { onMount } from 'svelte';
   import { profile } from 'stores/profile';
 
   import TextXS from 'components/TextXS.svelte';
@@ -36,6 +35,12 @@
     </svg>
     <span class={`font-bold ${$page.url.pathname === '/search' ? 'text-sky-500' : ''}`}>Search</span>
   </a>
+  {#if $page.url.pathname === '/search'}
+    <div class="flex flex-col gap-2 ml-7">
+      <a class={`flex gap-2 items-center px-2 py-1 hover:bg-slate-800 rounded-lg ${$page.url.searchParams.get('view') === 'posts' ? 'pointer-events-none text-sky-500' : ''}`} href="/search?view=posts">Posts</a>
+      <a class={`flex gap-2 items-center px-2 py-1 hover:bg-slate-800 rounded-lg ${$page.url.searchParams.get('view') === 'users' ? 'pointer-events-none text-sky-500' : ''}`} href="/search?view=users">Users</a>
+    </div>
+  {/if}
   <a class={`flex gap-2 items-center px-2 py-1 hover:bg-slate-800 rounded-lg ${$page.url.pathname.includes(`/u/${$profile.username}`) ? 'pointer-events-none' : ''}`} href={`/u/${$profile.username}`}>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class={`w-5 h-5 ${$page.url.pathname.includes(`/u/${$profile.username}`) ? 'fill-sky-500' : ''}`}>
       <path d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z" />
@@ -48,12 +53,25 @@
     </svg>
     <span class={`font-bold ${$page.url.pathname === '/shop' ? 'text-sky-500' : ''}`}>Shop</span>
   </a>
-  <a class={`flex gap-2 items-center px-2 py-1 hover:bg-slate-800 rounded-lg ${$page.url.pathname.includes('/notifications') ? 'pointer-events-none' : ''}`} href="/notifications">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class={`w-5 h-5 ${$page.url.pathname.includes('/notifications') ? 'fill-sky-500' : ''}`}>
+  {#if $page.url.pathname === '/shop'}
+    <div class="flex flex-col gap-2 ml-7">
+      <a class={`flex gap-2 items-center px-2 py-1 hover:bg-slate-800 rounded-lg ${$page.url.searchParams.get('view') === 'abilities' ? 'pointer-events-none text-sky-500' : ''}`} href="/shop?view=abilities">Abilities</a>
+      <a class={`flex gap-2 items-center px-2 py-1 hover:bg-slate-800 rounded-lg ${$page.url.searchParams.get('view') === 'avatars' ? 'pointer-events-none text-sky-500' : ''}`} href="/shop?view=avatars">Avatars</a>
+    </div>
+  {/if}
+  <a class={`flex gap-2 items-center px-2 py-1 hover:bg-slate-800 rounded-lg ${$page.url.pathname === '/notifications' ? 'pointer-events-none' : ''}`} href="/notifications">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class={`w-5 h-5 ${$page.url.pathname === '/notifications' ? 'fill-sky-500' : ''}`}>
       <path fill-rule="evenodd" d="M10 2a6 6 0 00-6 6c0 1.887-.454 3.665-1.257 5.234a.75.75 0 00.515 1.076 32.91 32.91 0 003.256.508 3.5 3.5 0 006.972 0 32.903 32.903 0 003.256-.508.75.75 0 00.515-1.076A11.448 11.448 0 0116 8a6 6 0 00-6-6zM8.05 14.943a33.54 33.54 0 003.9 0 2 2 0 01-3.9 0z" clip-rule="evenodd" />
     </svg>
-    <span class={`font-bold ${$page.url.pathname.includes('/notifications') ? 'text-sky-500' : ''}`}>Notifications</span>
+    <span class={`font-bold ${$page.url.pathname === '/notifications' ? 'text-sky-500' : ''}`}>Notifications</span>
   </a>
+  {#if $page.url.pathname === '/notifications'}
+    <div class="flex flex-col gap-2 ml-7">
+      <a class={`flex gap-2 items-center px-2 py-1 hover:bg-slate-800 rounded-lg ${$page.url.searchParams.get('view') === 'follows' ? 'pointer-events-none text-sky-500' : ''}`} href="/notifications?view=follows">Follows</a>
+      <a class={`flex gap-2 items-center px-2 py-1 hover:bg-slate-800 rounded-lg ${$page.url.searchParams.get('view') === 'shares' ? 'pointer-events-none text-sky-500' : ''}`} href="/notifications?view=shares">Shares</a>
+      <a class={`flex gap-2 items-center px-2 py-1 hover:bg-slate-800 rounded-lg ${$page.url.searchParams.get('view') === 'gifts' ? 'pointer-events-none text-sky-500' : ''}`} href="/notifications?view=gifts">Gifts</a>
+    </div>
+  {/if}
   <a class={`flex gap-2 items-center px-2 py-1 hover:bg-slate-800 rounded-lg ${$page.url.pathname === '/settings' ? 'pointer-events-none' : ''}`} href="/settings">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class={`w-5 h-5 ${$page.url.pathname === '/settings' ? 'fill-sky-500' : ''}`}>
       <path fill-rule="evenodd" d="M8.34 1.804A1 1 0 019.32 1h1.36a1 1 0 01.98.804l.295 1.473c.497.144.971.342 1.416.587l1.25-.834a1 1 0 011.262.125l.962.962a1 1 0 01.125 1.262l-.834 1.25c.245.445.443.919.587 1.416l1.473.294a1 1 0 01.804.98v1.361a1 1 0 01-.804.98l-1.473.295a6.95 6.95 0 01-.587 1.416l.834 1.25a1 1 0 01-.125 1.262l-.962.962a1 1 0 01-1.262.125l-1.25-.834a6.953 6.953 0 01-1.416.587l-.294 1.473a1 1 0 01-.98.804H9.32a1 1 0 01-.98-.804l-.295-1.473a6.957 6.957 0 01-1.416-.587l-1.25.834a1 1 0 01-1.262-.125l-.962-.962a1 1 0 01-.125-1.262l.834-1.25a6.957 6.957 0 01-.587-1.416l-1.473-.294A1 1 0 011 10.68V9.32a1 1 0 01.804-.98l1.473-.295c.144-.497.342-.971.587-1.416l-.834-1.25a1 1 0 01.125-1.262l.962-.962A1 1 0 015.38 3.03l1.25.834a6.957 6.957 0 011.416-.587l.294-1.473zM13 10a3 3 0 11-6 0 3 3 0 016 0z" clip-rule="evenodd" />
