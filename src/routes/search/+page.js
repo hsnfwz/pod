@@ -58,8 +58,8 @@ export async function load({ params, parent, depends, url }) {
 
   let IS_DEBUG = false;
 
-  let posts;
-  let profiles;
+  // let posts;
+  // let profiles;
 
   if (!session) return { posts: [] };
 
@@ -104,15 +104,46 @@ export async function load({ params, parent, depends, url }) {
   //   posts = postRecords;
   // }
 
+
+  let posts;
+  let profiles;
+
   const { data: postRecords } = await supabase
   .from('post')
   .select('*, profile_id (*)')
   .match({ is_hidden: false })
-  .order('created_at', { ascending: false })
+  .order('created_at', { ascending: false });
 
   IS_DEBUG && console.log('postRecords', postRecords);
-
   posts = postRecords;
+  const postIds = posts.map(p => p.id);
+
+  let buys;
+
+  const { data: profileBuyRecords } = await supabase
+  .from('profile_buy')
+  .select('*')
+  .in('post_id', postIds)
+  .match({ profile_id: session.user.id });
+
+  IS_DEBUG && console.log('profileBuyRecords', profileBuyRecords);
+  buys = profileBuyRecords;
+
+  let shares;
+
+  const { data: profileShareRecords } = await supabase
+  .from('profile_share')
+  .select('*')
+  .in('post_id', postIds)
+  .match({ receiver_profile_id: session.user.id, status: 'CONFIRMED' });
+
+  IS_DEBUG && console.log('profileShareRecords', profileShareRecords);
+  shares = profileShareRecords;
+
+  posts.forEach(p => {
+    p.isBought = buys.find(b => b.post_id === p.id);
+    p.isShared = shares.find(s => s.post_id === p.id);
+  });
 
   const { data: profileRecords } = await supabase
   .from('profile')

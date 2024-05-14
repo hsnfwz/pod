@@ -109,13 +109,7 @@
   });
 </script>
 
-<div class="flex flex-col gap-4">
-  <div class="flex bg-slate-900 rounded-lg p-4">
-    <a class={`hover:underline hover:text-sky-500 px-2 py-1 font-bold self-start ${$page.url.search === '?view=follows' ? 'text-sky-500 pointer-events-none' : ''}`} href="/notifications?view=follows">Follows</a>
-    <a class={`hover:underline hover:text-sky-500 px-2 py-1 font-bold self-start ${$page.url.search === '?view=shares' ? 'text-sky-500 pointer-events-none' : ''}`} href="/notifications?view=shares">Shares</a>
-    <a class={`hover:underline hover:text-sky-500 px-2 py-1 font-bold self-start ${$page.url.search === '?view=gifts' ? 'text-sky-500 pointer-events-none' : ''}`} href="/notifications?view=gifts">Gifts</a>
-  </div>
-
+<div class="w-[500px] flex flex-col gap-4">
   {#if $page.url.search === '' || $page.url.search === '?view=follows'}
     <div class="flex flex-col gap-4">
       {#if profileFollowNotifications.length > 0}

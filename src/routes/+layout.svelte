@@ -41,6 +41,7 @@
   });
 </script>
 
+
 <main class="flex justify-center gap-4 p-4">
   {#if isLoading}
     <p>Loading...</p>
@@ -58,25 +59,66 @@
 
 <!--
   HIGH PRIORITY
-  - redesign website to be even simpler and not look like every twitter alternative out there
-  - mark button as "sent" after a post is shared to the user AND insert a "confirmed" profile_share record instead of a "pending" profile_share record when resharing same post that has already been confirmed before by the receiver
-  - change gifting to super coins instead of regular coins
-  - create the super coin store
-  - create report feature and post stats for safety
-  - if user bought a post, let them see the full body in the post preview
-  - show 12 and 24 hour time all around the app or maybe just a profile setting for preference
+  - if a post is nsfw or spoiler, user should click reveal before seeing the content
+  - check abilities when doing any activity
+  - decrement profile super coin count on redeem
+  - disable button if profile super coin coin is less than cost
+  - if an account is private, mark posts by them as private so that only followers can view them and no the general public
+  - live data updates/feedback throughout the app
+
+
+
+  REVISIT
+    - problems with report system
+    -- it can be easily abused for simply not agreeing with something
+    -- needs people to review what was reported
+
+    - problems with a vote system
+    -- it can be easily abused for simply not agreeing with something
+    -- not everyone will vote safe or unsafe
+
+    - police system
+    -- users can apply to be a police officer
+    -- each officer would agree to the rules and that breaking them would result in an temporary ban
+    -- each officer would specialize in a field (ex: hate speech, fake news, etc.)
+    -- each officer would have access to a page containing all reported posts
+    -- each officer would confirm (reward user) or reject (penalize and temporarily ban user) a report by a user
+    -- each officer would go through a review process every period of time
+    -- each officer would have a badge on their account
+    -- each officer earns coins and super coins for their efforts
+    -- officers can also report content for other officers to review
+    -- each user can see which officer reviewed their post - helps in case an officer abuses power and needs to be reported by the user
+
+    - problems with a police system
+    -- needs people to review what was reported
+    -- requires constant performance reviews of the officers to ensure rules are being followed
+
+
 
   LOW PRIORITY
-  - live data updates throughout the app
-  - update posts (require tracking edit history)
+  - profile customizations through the shop (inspired by reddit and discord)
+  - animations throughout
+
   - delete profiles (currently hiding on delete)
   - pause profiles (currently hiding on delete)
+
+  - update posts (require tracking edit history)
+
+  - show sort/filter
   - filter by custom date range
   - broadcast and broadcast count for each post
-  - upload media files, create polls
-  - fix problems with logging in using magic email - seems to never work on first attempt
+  - post media files and polls
+  - setting to show 12 or 24 hour time
+  - setting to show/hide nsfw and spoiler content
+  - dark mode scrollbar
+
+  - if a user changes their username, then any mentions in posts will have their outdated username - how should we handle this??
+  - when mentioning someone with a question mark for asking them a question how should we handle it??
+  - combine share and bought into 1 table called "redeemed" and status type of redeemed = (unlocked, sent)
+
   - supabase error handling
   - supabase RLS
   - optimize fetching/refreshing of data everywhere (limits, updating/loading state, etc.)
-  - fetch data in batches (either paginate or infinite scroll)
+
+  - organize code (components, layouts, sublayouts, etc.)
 -->

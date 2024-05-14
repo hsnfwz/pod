@@ -137,21 +137,15 @@
     {/each}
   </div> -->
 
-<div class="flex flex-col gap-4">
-  <div class="flex bg-slate-900 rounded-lg p-4">
-    <a class={`hover:underline hover:text-sky-500 px-2 py-1 font-bold self-start ${$page.url.search === '?view=posts' ? 'text-sky-500 pointer-events-none' : ''}`} href="/search?view=posts">Posts</a>
-    <a class={`hover:underline hover:text-sky-500 px-2 py-1 font-bold self-start ${$page.url.search === '?view=users' ? 'text-sky-500 pointer-events-none' : ''}`} href="/search?view=users">Users</a>
-  </div>
+<div class="w-[500px] flex flex-col gap-4">
+  <Searchbar />
   {#if $page.url.search === '' || $page.url.search === '?view=posts' || $page.url.search.includes('?term=')}
     {#each $page.data.posts as post}
       <PostPreview {post} showParentPost />
     {/each}
   {:else if $page.url.search === '?view=users'}
     {#each $page.data.profiles as profile}
-      <ProfilePreview {profile} />
+      <ProfilePreview user={profile} />
     {/each}
   {/if}
-</div>
-<div class="flex flex-col gap-4">
-  <Searchbar />
 </div>
