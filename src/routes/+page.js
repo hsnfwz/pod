@@ -17,7 +17,7 @@ export async function load({ params, parent, depends }) {
 
   IS_DEBUG && console.log('postRecords', postRecords);
 
-  posts = postRecords;
+  posts = postRecords || [];
 
   return {
     posts,
