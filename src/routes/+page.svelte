@@ -7,7 +7,7 @@
 
 <div class="w-[500px] flex flex-col gap-4">
   <PostTextEditor />
-  {#if $page.data.posts.length > 0}
+  {#if $page.data.posts && $page.data.posts.length > 0}
     <div class="flex flex-col gap-4">
       {#each $page.data.posts as post}
         <PostPreview {post} showParentPost />
